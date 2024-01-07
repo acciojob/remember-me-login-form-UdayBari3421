@@ -1,35 +1,36 @@
-//your JS code here. If required.
-function handleSubmit(event) {
-  event.preventDefault(); 
+const userName = document.getElementById('username');
+const passWord = document.getElementById('password');
+const checkBox = document.getElementById('checkbox');
+const submit = document.getElementById('submit');
+var existingButton = document.getElementById("existing");
 
-  const usernameInput = document.getElementById("username");
-  const passwordInput = document.getElementById("password");
-  const rememberCheckbox = document.getElementById("remember");
+function updateExistingButton() {
+  if (localStorage.getItem("username")) {
+    existingButton.style.display = "block";
+  } else {
+    existingButton.style.display = "none";
+  }
+}
 
-  const username = usernameInput.value;
-  const password = passwordInput.value;
-  const rememberMe = rememberCheckbox.checked;
+submit.addEventListener('click', (event) => {
+  event.preventDefault(); // Prevent form submission
 
-  
-  if (rememberMe) {
-    localStorage.setItem("username", username);
-    localStorage.setItem("password", password);
+  if (checkBox.checked) {
+    localStorage.setItem('username', userName.value);
+    localStorage.setItem('password', passWord.value);
   } else {
     localStorage.removeItem("username");
     localStorage.removeItem("password");
   }
 
-  alert("Logged in as " + username);
-}
+  updateExistingButton();
+  alert(`Logged in as ${userName.value}`);
+});
 
-function handleExistingLogin() {
-  const savedUsername = localStorage.getItem("username");
-
+existingButton.addEventListener("click", function() {
+  var savedUsername = localStorage.getItem("username");
   alert("Logged in as " + savedUsername);
-}
+});
 
-const loginForm = document.getElementById("login-form");
-const existingUserBtn = document.getElementById("existing");
-
-loginForm.addEventListener("submit", handleSubmit);
-existingUserBtn.addEventListener("click", handleExistingLogin);
+// Call updateExistingButton when the page loads
+updateExistingButton();
