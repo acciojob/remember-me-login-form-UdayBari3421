@@ -1,36 +1,35 @@
-const userName = document.getElementById('username');
-const passWord = document.getElementById('password');
-const checkBox = document.getElementById('checkbox');
-const submit = document.getElementById('submit');
-var existingButton = document.getElementById("existing");
+const form = document.querySelector("form");
+const user = document.querySelector("#username");
+const pass = document.querySelector("#passowrd");
+const checkbox = document.querySelector("#checkbox");
+const submit = document.querySelector("#submit");
 
-function updateExistingButton() {
-  if (localStorage.getItem("username")) {
-    existingButton.style.display = "block";
-  } else {
-    existingButton.style.display = "none";
-  }
-}
-
-submit.addEventListener('click', (event) => {
-  event.preventDefault(); // Prevent form submission
-
-  if (checkBox.checked) {
-    localStorage.setItem('username', userName.value);
-    localStorage.setItem('password', passWord.value);
-  } else {
-    localStorage.removeItem("username");
-    localStorage.removeItem("password");
-  }
-
-  updateExistingButton();
-  alert(`Logged in as ${userName.value}`);
+form.addEventListener("submit",(event)=>{
+	
+	event.preventDefault();
+	
+	if(checkbox.checked && user.value !== ""){
+		let username = localStorage.getItem("username");
+		let password = localStorage.getItem("password");
+		
+		if (username == user.value) {
+			localStorage.removeItem("username");
+			localStorage.removeItem("password");
+			alert(`Logged in as ${user.value}`);
+		} 
+		localStorage.setItem("username",user.value);
+		localStorage.setItem("password",pass.value);
+		
+	} else{
+		alert("Logged in as username");
+	}
+	form.reset();
 });
 
-existingButton.addEventListener("click", function() {
-  var savedUsername = localStorage.getItem("username");
-  alert("Logged in as " + savedUsername);
+user.addEventListener("input",()=>{
+	if(user.value == localStorage.getItem("username")){
+		existing.style.display = "block";
+	} else{
+		existing.style.display = "none";
+	}
 });
-
-// Call updateExistingButton when the page loads
-updateExistingButton();
