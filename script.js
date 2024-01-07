@@ -1,42 +1,33 @@
-const username = document.querySelector("#username");
-const password = document.querySelector("#password");
-const checkbox = document.querySelector("#checkbox");
-const form = document.querySelector("form");
-const submit = document.querySelector("#submit");
+// Check if there are saved details
+    if (localStorage.getItem('savedUsername') && localStorage.getItem('savedPassword')) {
+      document.body.innerHTML += '<button id="existing">Login as existing user</button>';
+    }
 
-form.addEventListener("submit",(event)=>{
-	event.preventDefault();
-	let btn = document.createElement("button");
-	if (checkbox.checked && username.value !== "") {
-		if (localStorage.getItem("username") === username.value) {
-				let user = localStorage.getItem("username");
-				let pass = localStorage.getItem("password");
+    // Submit event handler
+    document.getElementById('loginForm').addEventListener('submit', function (event) {
+      event.preventDefault();
 
-			username.addEventListener("input",()=>{
-				btn.innerText= "Login as exiting user";
-				btn.setAttribute("type", "submit");
-				btn.setAttribute("id", "existing");
-				form.appendChild(btn);
-				password.value = pass.value;
-				checkbox.checked = true;
-				submit.style.display = "none";
-			});
-			username.value = user.value;
-			alert(`Logged in as ${user}`);
-		}
-		else{
-			localStorage.setItem("username",username.value);
-			localStorage.setItem("password",password.value);
-			alert(`Logged in as ${username.value}`);
-		}
-		form.reset();
-		btn.style.display = "block";
-	}
-	else{
-		localStorage.getItem("username");
-		localStorage.getItem("password");
-		alert("Logged in as username");
-	}
-	btn.style.display = "block";
-	// submit.style.display = "none";
-});
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      var rememberCheckbox = document.getElementById('checkbox');
+
+      if (rememberCheckbox.checked) {
+        // Save details to local storage
+        localStorage.setItem('savedUsername', username);
+        localStorage.setItem('savedPassword', password);
+      } else {
+        // Remove saved details from local storage
+        localStorage.removeItem('savedUsername');
+        localStorage.removeItem('savedPassword');
+      }
+
+      // Show alert
+      alert('Logged in as ' + username);
+	  form.reset();
+    }); 
+
+    // Existing user button event handler
+    document.getElementById('existing').addEventListener('click', function () {
+      var savedUsername = localStorage.getItem('savedUsername');
+      alert('Logged in as ' + savedUsername);
+    });
