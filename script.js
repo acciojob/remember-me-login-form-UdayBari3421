@@ -6,14 +6,14 @@ const submit = document.querySelector("#submit");
 
 form.addEventListener("submit",(event)=>{
 	event.preventDefault();
-	let btn = document.createElement("input");
+	let btn = document.createElement("button");
 	if (checkbox.checked && username.value !== "") {
 		if (localStorage.getItem("username") === username.value) {
 				let user = localStorage.getItem("username");
 				let pass = localStorage.getItem("password");
 
 			username.addEventListener("input",()=>{
-				btn.setAttribute("value", "Login as exiting user");
+				btn.innerText= "Login as exiting user";
 				btn.setAttribute("type", "submit");
 				btn.setAttribute("id", "existing");
 				form.appendChild(btn);
