@@ -26,10 +26,10 @@ form.addEventListener("submit",(event)=>{
 	form.reset();
 });
 
-user.addEventListener("input",()=>{
-	if(user.value == localStorage.getItem("username")){
-		existing.style.display = "block";
-	} else{
-		existing.style.display = "none";
-	}
-});
+// user.addEventListener("input",()=>{
+// 	if(user.value == localStorage.getItem("username")){
+// 		existing.style.display = "block";
+// 	} else{
+// 		existing.style.display = "none";
+// 	}
+// });
