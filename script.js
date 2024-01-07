@@ -15,7 +15,7 @@ form.addEventListener("submit",(event)=>{
 			username.addEventListener("input",()=>{
 				btn.setAttribute("value", "Login as exiting user");
 				btn.setAttribute("type", "submit");
-				btn.setAttribute("id", "btn");
+				btn.setAttribute("id", "existing");
 				form.appendChild(btn);
 				password.value = pass.value;
 				checkbox.checked = true;
@@ -30,13 +30,12 @@ form.addEventListener("submit",(event)=>{
 			alert(`Logged in as ${username.value}`);
 		}
 		form.reset();
-		// form.removeChild(btn);
 		btn.style.display = "block";
 	}
 	else{
 		localStorage.getItem("username");
 		localStorage.getItem("password");
-		alert("Enter Details First");
+		alert("Logged in as username");
 	}
 	btn.style.display = "block";
 	// submit.style.display = "none";
