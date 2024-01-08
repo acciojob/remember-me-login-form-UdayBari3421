@@ -3,15 +3,15 @@ const user = document.querySelector("#username");
 const pass = document.querySelector("#passowrd");
 const checkbox = document.querySelector("#checkbox");
 const submit = document.querySelector("#submit");
-let obj;
+let obj = {
+	usernam: form.username.value,
+	passwor: form.password.value,
+};
 form.addEventListener("submit",(event)=>{
-	obj = {
-		usernam: form.username.value,
-		passwor: form.password.value,
-	};
+	
 	event.preventDefault();
 	
-	if(checkbox.checked){
+	if(checkbox.checked && obj.usernam !== ""){
 		let username = localStorage.getItem("username");
 		let password = localStorage.getItem("password");
 		
@@ -23,7 +23,7 @@ form.addEventListener("submit",(event)=>{
 		localStorage.setItem("username",obj.usernam);
 		localStorage.setItem("password",obj.passwor);
 		console.log(obj.usernam);
-		console.log(obj.passwor);
+		console.log(pass.value);
 		
 	} else{
 		alert("Logged in as username");
@@ -32,7 +32,6 @@ form.addEventListener("submit",(event)=>{
 });
 
 user.addEventListener("input",()=>{
-	
 	if(obj.usernam == localStorage.getItem("username")){
 		existing.style.display = "block";
 	} else{
