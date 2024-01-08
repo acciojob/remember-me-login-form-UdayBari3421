@@ -26,7 +26,7 @@ form.addEventListener("submit",(event)=>{
 		console.log(pass.value);
 		
 	} else{
-		alert("Logged in as username");
+		alert("Logged in as username1");
 	}
 	form.reset();
 });
